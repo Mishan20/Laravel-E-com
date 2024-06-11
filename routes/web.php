@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserManagememntController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,5 +20,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('banks', BankController::class);
+
+//This is use for remove some action in the controller
+// Route::resource('users', UserManagememntController::class)->except('index');
+
+Route::resource('users', UserManagememntController::class);
+
 
 require __DIR__.'/auth.php';
