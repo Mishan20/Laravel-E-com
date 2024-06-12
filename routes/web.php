@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserManagememntController;
 
@@ -23,8 +24,8 @@ Route::resource('banks', BankController::class);
 
 //This is use for remove some action in the controller
 // Route::resource('users', UserManagememntController::class)->except('index');
-
 Route::resource('users', UserManagememntController::class);
+Route::resource('products', ProductManagementController::class);
 
 
 require __DIR__.'/auth.php';

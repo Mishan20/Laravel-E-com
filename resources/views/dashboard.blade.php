@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <!-- <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Dashboard') }}
-        </h2>
+        </h2> -->
+        @if (Auth::user()->hasRole(['admin']))
+        <a href="{{url('/users/create')}}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Add Users</a>
+        @endif
+        @if (Auth::user()->hasRole(['seller']))
+        <a href="{{url('/products/create')}}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Add Product</a>
+        @endif
     </x-slot>
 
     <div class="py-12">
