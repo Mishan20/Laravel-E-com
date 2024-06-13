@@ -10,9 +10,9 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm overflow-hiden sm:rounded-lg">
                 <div class="p-6 text-gray-900"></div>
-                <form action="{{ route('products.store')}}" method="POST">
+                <form action="{{ route('products.update', $product->id)}}" method="POST">
                     @csrf
-
+                    @method('PUT')
                     <div class="mt-4">
                         <x-input-label for="p_id" :value="__('Product ID')" />
                         <x-text-input id="p_id"  class="block w-full mt-1" type="text" name="p_id" :value="old('p_id') ?? $product->p_id" required autocomplete="" />

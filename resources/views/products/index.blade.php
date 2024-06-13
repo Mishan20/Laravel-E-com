@@ -10,6 +10,17 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <!-- Session Messages -->
+                    @if (session('success'))
+                        <div class="mb-4 text-green-600">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="mb-4 text-red-600">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <table class="w-full border-collapse table-auto">
                         <thead>
                             <tr class="bg-gray-200">

@@ -69,7 +69,7 @@ class ProductManagementController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'p_id' => 'required|unique:products' .$id,
+            'p_id' => 'required|unique:products,p_id,' . $id,
             'name' => 'required',
             'qty' => 'required',
             'price' => 'required',
@@ -90,8 +90,7 @@ class ProductManagementController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        Product::find($id)->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 }

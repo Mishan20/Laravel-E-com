@@ -91,8 +91,7 @@ class UserManagememntController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
-        $user->delete();
+        User::find($id)->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }
