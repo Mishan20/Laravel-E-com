@@ -25,7 +25,8 @@
                         <thead>
                             <tr class="bg-gray-200">
                                 <th class="px-4 py-2 border">ID</th>
-                                <th class="px-4 py-2 border">Category ID</th>
+                                <th class="px-4 py-2 border">Category</th>
+                                <th class="px-4 py-2 border">Seller</th>
                                 <th class="px-4 py-2 border">Name</th>
                                 <th class="px-4 py-2 border">Qty</th>
                                 <th class="px-4 py-2 border">Price</th>
@@ -37,17 +38,12 @@
                             @foreach($products as $products)
                             <tr>
                                 <td class="px-4 py-2 text-center border">{{ $products->p_id }}</td>
-                                <td class="px-4 py-2 text-center border">{{ $products->category_id }}</td>
+                                <td class="px-4 py-2 text-center border">{{ $products->category->name }}</td>
+                                <td class="px-4 py-2 text-center border">{{ $products->seller }}</td>
                                 <td class="px-4 py-2 text-center border">{{ $products->name }}</td>
                                 <td class="px-4 py-2 text-center border">{{ $products->qty }}</td>
-                                <td class="px-4 py-2 text-center border">{{ $products->price }}</td>
-                                <td class="px-4 py-2 text-center border">
-                                    @if($products->status == 1)
-                                        Active
-                                    @else
-                                        Inactive
-                                    @endif
-                                </td>
+                                <td class="px-4 py-2 text-center border">{{ number_format($products->price, 2) }}</td>
+                                <td class="px-4 py-2 text-center border">{{ $products->status() }}</td>
                                 <td class="px-4 py-2 text-center border">
                                     <a href="{{ route('products.edit', $products->id) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
                                     <form action="{{ route('products.destroy', $products->id) }}" method="POST" style="display:inline-block;">

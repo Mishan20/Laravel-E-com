@@ -14,7 +14,7 @@ class ProductManagementController extends Controller
     public function index()
     {
 
-        $products = Product::all();
+        $products = Product::paginate();
         return view('products.index', compact('products'));
     }
 

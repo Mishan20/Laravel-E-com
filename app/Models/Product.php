@@ -2,20 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable, HasRoles;
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function seller()
+    public function seller(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'seller_id'  ,  'id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
+    }
+
+    public function status(): string
+    {
+        return $this->status ? 'Active' : 'Inactive';
     }
 }
