@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductManagementController extends Controller
@@ -12,6 +13,7 @@ class ProductManagementController extends Controller
      */
     public function index()
     {
+
         $products = Product::all();
         return view('products.index', compact('products'));
     }
@@ -21,7 +23,8 @@ class ProductManagementController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -34,6 +37,7 @@ class ProductManagementController extends Controller
             'name' => 'required',
             'qty' => 'required',
             'price' => 'required',
+            'category_id' => 'required',
         ]);
         $product = new Product();
 
@@ -41,6 +45,9 @@ class ProductManagementController extends Controller
         $product->name = $request->name;
         $product->qty = $request->qty;
         $product->price = $request->price;
+        $product->status = 1;
+        $product->category_id = $request->category_id;
+        $product->seller_id = auth()->user()->id;
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Product created successfully');
@@ -59,8 +66,9 @@ class ProductManagementController extends Controller
      */
     public function edit(string $id)
     {
+        $categories = Category::all();
         $product = Product::find($id);
-        return view('products.edit', compact('product'));
+        return view('products.edit', compact('product','categories'));
     }
 
     /**
@@ -73,6 +81,7 @@ class ProductManagementController extends Controller
             'name' => 'required',
             'qty' => 'required',
             'price' => 'required',
+            'category_id' => 'required',
         ]);
         $product = Product::find($id);
 
@@ -80,6 +89,7 @@ class ProductManagementController extends Controller
         $product->name = $request->name;
         $product->qty = $request->qty;
         $product->price = $request->price;
+        $product->category_id = $request->category_id;
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
@@ -90,7 +100,10 @@ class ProductManagementController extends Controller
      */
     public function destroy(string $id)
     {
-        Product::find($id)->delete();
+        $product = Product::find($id);
+        $product->delete();
+
+
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 }
