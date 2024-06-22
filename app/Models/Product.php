@@ -12,14 +12,14 @@ class Product extends Model
 {
     use HasFactory, Notifiable, HasRoles;
 
-    public function category(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
 
-    public function seller(): BelongsTo
+    public function seller()
     {
-        return $this->belongsTo(User::class, 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
     public function status(): string
