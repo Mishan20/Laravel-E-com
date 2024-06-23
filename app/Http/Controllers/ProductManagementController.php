@@ -32,22 +32,26 @@ class ProductManagementController extends Controller
      */
     public function store(Request $request)
     {
+        //save image to disk
+        $imagePath =$request->file('image')->store('products', 'public');
         $request->validate([
             'p_id' => 'required|unique:products',
             'name' => 'required',
             'qty' => 'required',
             'price' => 'required',
             'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $product = new Product();
 
-        $product->p_id = $request->p_id;
-        $product->name = $request->name;
-        $product->qty = $request->qty;
-        $product->price = $request->price;
-        $product->status = 1;
+        $product->p_id        = $request->p_id;
+        $product->name        = $request->name;
+        $product->qty         = $request->qty;
+        $product->price       = $request->price;
+        $product->status      = 1;
         $product->category_id = $request->category_id;
-        $product->seller_id = auth()->user()->id;
+        $product->seller_id   = auth()->user()->id;
+        $product->image       = $imagePath;
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Product created successfully');
@@ -58,7 +62,8 @@ class ProductManagementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.show' , compact('product'));
     }
 
     /**

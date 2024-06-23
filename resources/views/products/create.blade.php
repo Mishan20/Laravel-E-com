@@ -10,12 +10,12 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm overflow-hiden sm:rounded-lg">
                 <div class="p-6 text-gray-900"></div>
-                <form action="{{ route('products.store')}}" method="POST">
+                <form action="{{ route('products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mt-4">
                         <x-input-label for="p_id" :value="__('Product ID')" />
-                        <x-text-input id="p_id"  class="block w-full mt-1" type="text" name="p_id" :value="old('id')" required autocomplete="" />
+                        <x-text-input id="p_id" class="block w-full mt-1" type="text" name="p_id" :value="old('id')" required autocomplete="" />
                         <x-input-error :messages="$errors->get('p_id')" class="mt-2" />
                     </div>
 
@@ -27,7 +27,7 @@
 
                     <div class="mt-4">
                         <x-input-label for="number" :value="__('Quantity')" />
-                        <x-text-input id="qty"  class="block w-full mt-1" type="number" name="qty" :value="old('qty')" required autocomplete="" />
+                        <x-text-input id="qty" class="block w-full mt-1" type="number" name="qty" :value="old('qty')" required autocomplete="" />
                         <x-input-error :messages="$errors->get('qty')" class="mt-2" />
                     </div>
 
@@ -42,10 +42,16 @@
                         <select name="category_id" id="category_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="image" :value="__('Image')" />
+                        <input type="file" name="image">
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
