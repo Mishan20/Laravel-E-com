@@ -50,7 +50,7 @@
 
                     <div class="mt-4">
                         <x-input-label for="image" :value="__('Image')" />
-                        <input type="file" name="image">
+                        <div class="dropzone" id="image-dropzone"></div>
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
@@ -64,4 +64,40 @@
             </div>
         </div>
     </div>
+
+      <!-- Include Dropzone.js -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+
+    <!-- Initialize Dropzone -->
+    <script>
+        Dropzone.options.imageDropzone = {
+            url: "{{ route('products.store') }}",
+            maxFilesize: 2, // MB
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            autoProcessQueue: false,
+            init: function() {
+                var myDropzone = this;
+
+                // Prevent the form from being submitted normally
+                document.querySelector("#product-dropzone").addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Process the images
+                    if (myDropzone.getQueuedFiles().length > 0) {
+                        myDropzone.processQueue();
+                    } else {
+                        myDropzone.uploadFiles([]);
+                    }
+                });
+
+                // On success, redirect or perform another action
+                myDropzone.on("success", function(file, response) {
+                    window.location.href = "{{ route('products.index') }}";
+                });
+            }
+        };
+    </script>
 </x-app-layout>

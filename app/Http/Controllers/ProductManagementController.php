@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductManagementController extends Controller
 {
@@ -13,8 +15,11 @@ class ProductManagementController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $products = Product::paginate();
+        if (Auth::user()->hasRole('admin')) {
+            $products = Product::paginate();
+        } elseif (Auth::user()->hasRole('seller')) {
+            $products = Product::where('seller_id', '=', Auth::id())->paginate();
+        }
         return view('products.index', compact('products'));
     }
 
@@ -33,7 +38,7 @@ class ProductManagementController extends Controller
     public function store(Request $request)
     {
         //save image to disk
-        $imagePath =$request->file('image')->store('products', 'public');
+        $imagePath = $request->file('image')->store('products', 'public');
         $request->validate([
             'p_id' => 'required|unique:products',
             'name' => 'required',
@@ -63,7 +68,7 @@ class ProductManagementController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        return view('products.show' , compact('product'));
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -73,7 +78,7 @@ class ProductManagementController extends Controller
     {
         $categories = Category::all();
         $product = Product::find($id);
-        return view('products.edit', compact('product','categories'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -87,6 +92,7 @@ class ProductManagementController extends Controller
             'qty' => 'required',
             'price' => 'required',
             'category_id' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $product = Product::find($id);
 
@@ -95,6 +101,17 @@ class ProductManagementController extends Controller
         $product->qty = $request->qty;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            // Save new image
+            $imagePath = $request->file('image')->store('products', 'public');
+            $product->image = $imagePath;
+        }
+
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully');

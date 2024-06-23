@@ -30,25 +30,65 @@
 
                 @role('admin')
                 @endrole -->
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                @foreach($products as $product)
-                <div class="overflow-hidden bg-white rounded-lg shadow-md">
-                    <img class="object-cover object-center w-full h-48" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
-                    <div class="p-4">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-lg font-semibold">{{ $product->name }}</p>
-                                <p class="text-sm text-gray-600">Category: {{ $product->category->name }}</p>
-                            </div>
-                            <div class="text-lg font-bold">
-                                <p>${{ number_format($product->price, 2) }}</p>
+            <div class="mb-8">
+                <form action="{{ route('dashboard') }}" method="GET" class="flex items-center">
+                    <input type="text" name="query" value="{{ request('query') }}" placeholder="Search by name or category..." class="block w-full px-4 py-2 mr-2 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <button type="submit" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Search</button>
+                </form>
+            </div>
+
+            @if(request('query'))
+            <div class="mb-8">
+                <h2 class="mb-4 text-2xl font-semibold leading-tight text-gray-800">Search Results</h2>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach($products as $product)
+                    <div class="overflow-hidden bg-white rounded-lg shadow-md">
+                        <img class="object-cover object-center w-full h-48" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                        <div class="p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-lg font-semibold">{{ $product->name }}</p>
+                                    <p class="text-sm text-gray-600">Category: {{ $product->category->name }}</p>
+                                </div>
+                                <div class="text-lg font-bold">
+                                    <p>${{ number_format($product->price, 2) }}</p>
+                                </div>
                             </div>
                         </div>
+                        <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 hover:bg-blue-700">Add to Cart</button>
                     </div>
-                    <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 hover:bg-blue-700">Add to Cart</button>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
+            @else
+            @foreach($categories as $category)
+            <div class="mb-8">
+                <h2 class="mb-4 text-2xl font-semibold leading-tight text-gray-800">{{ $category->name }}</h2>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach($category->products as $product)
+                    <div class="overflow-hidden bg-white rounded-lg shadow-md">
+                        <img class="object-cover object-center w-full h-48" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                        <div class="p-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-lg font-semibold">{{ $product->name }}</p>
+                                    <p class="text-sm text-gray-600">Category: {{ $category->name }}</p>
+                                </div>
+                                <div class="text-lg font-bold">
+                                    <p>${{ number_format($product->price, 2) }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 hover:bg-blue-700">Add to Cart</button>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endforeach
+            @endif
+
         </div>
     </div>
 </x-app-layout>
