@@ -25,7 +25,6 @@
                 </div>
                 @endhasrole
 
-
                 @hasrole(['admin', 'seller'])
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
@@ -40,6 +39,17 @@
                 </div>
                 @endhasrole
             </div>
+
+            <!-- Cart Icon -->
+            @hasrole(['admin', 'buyer'])
+            <div class="flex items-center">
+                <a href="{{ route('cart') }}" class="relative text-gray-600 hover:text-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13l-1.4 7h12.8l-1.4-7M7 13h10m-5 5h.01M5 21h14"></path>
+                    </svg>
+                </a>
+            </div>
+            @endhasrole
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

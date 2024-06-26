@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -19,11 +20,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::resource('users', UserManagememntController::class);
+    Route::post('/add-to-cart/{product}' , [CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::get('/cart' , [CartController::class, 'cart'])->name('cart');
+    Route::post('/cart/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 });
 
 Route::group(['middleware' => [ 'auth', 'role:admin|seller']], function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductManagementController::class);
+    Route::delete('/products/{product}/delete-image', [ProductManagementController::class, 'deleteImage'])->name('products.deleteImage');
     
 });
 

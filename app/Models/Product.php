@@ -26,4 +26,8 @@ class Product extends Model
     {
         return $this->status ? 'Active' : 'Inactive';
     }
+
+    public function image(){
+        return asset('storage/'.$this->image);
+    }
 }

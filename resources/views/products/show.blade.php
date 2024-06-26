@@ -12,7 +12,8 @@
                 <div class="p-6 text-gray-900">
                     <div class="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-md">
                         @if($product->image)
-                        <img class="object-cover w-full h-48 rounded-t-lg" src="{{ asset('storage/' . $product->image) }}" alt="Product Image">
+                        <!-- <img class="object-cover w-full h-48 rounded-t-lg" src="{{ asset('storage/' . $product->image) }}" alt="Product Image"> -->
+                        <img class="object-cover w-full h-48 rounded-t-lg" src="{{ $product->image() }}" alt="Product Image">
                         @else
                         <img class="object-cover w-full h-48 rounded-t-lg" src="{{ asset('images/default-product.png') }}" alt="Default Image">
                         @endif

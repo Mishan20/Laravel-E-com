@@ -3,14 +3,14 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Edit Product') }}
         </h2>
-        <a href="{{url('/products')}}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Back to Product List</a>
+        <a href="{{ url('/products') }}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Back to Product List</a>
     </x-slot>
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm overflow-hiden sm:rounded-lg">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900"></div>
-                <form action="{{ route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mt-4">
@@ -42,7 +42,7 @@
                         <select name="category_id" id="category_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->id}}" @if($product->category_id == $category->id) selected @endif>{{$category->name}}</option>
+                            <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
@@ -54,7 +54,8 @@
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         @if($product->image)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="Current Image" class="object-cover w-32 h-32">
+                            <img src="{{ $product->image() }}" alt="Current Image" class="object-cover w-32 h-32">
+                            <button type="button" class="px-4 py-2 mt-2 text-white bg-red-500 rounded hover:bg-red-700" onclick="document.getElementById('delete-image-form').submit();">Delete Image</button>
                         </div>
                         @endif
                     </div>
@@ -64,6 +65,11 @@
                             {{ __('Edit Product') }}
                         </x-primary-button>
                     </div>
+                </form>
+
+                <form id="delete-image-form" action="{{ route('products.deleteImage', $product->id) }}" method="POST" style="display: none;" enctype="multipart/form-data">
+                    @csrf
+                    @method('DELETE')
                 </form>
 
             </div>

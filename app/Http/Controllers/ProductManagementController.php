@@ -128,4 +128,17 @@ class ProductManagementController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
+
+    public function deleteImage(string $id)
+    {
+        $product = Product::find($id);
+
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+            $product->image = null;
+            $product->save();
+        }
+
+        return redirect()->route('products.edit', $product->id)->with('success', 'Product image deleted successfully');
+    }
 }
