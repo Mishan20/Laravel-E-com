@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\UserManagememntController;
 use App\Http\Controllers\ProductManagementController;
 
@@ -43,6 +44,9 @@ Route::resource('banks', BankController::class);
 //This is use for remove some action in the controller
 // Route::resource('users', UserManagememntController::class)->except('index');
 
+
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
 
 
 require __DIR__.'/auth.php';
