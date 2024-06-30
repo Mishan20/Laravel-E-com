@@ -46,6 +46,11 @@
                 <a href="{{ url('auth/google') }}">
                     <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
                 </a>
+
+                <a href="{{ route('auth.facebook') }}" style="background-color: #183153" class="inline-flex items-center float-left h-10 px-2 py-2 mt-2 text-xs font-semibold tracking-widest text-white uppercase transition transition-colors duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md rounded-lg hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:shadow-outline0">
+                    <img src="https://www.cdnlogo.com/logos/f/9/facebook.svg" class="w-8 p-0 m-0">
+                    Login Facebook
+                </a>
             </div>
         </div>
     </form>

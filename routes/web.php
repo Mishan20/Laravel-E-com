@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\UserManagememntController;
 use App\Http\Controllers\ProductManagementController;
 
@@ -47,6 +48,9 @@ Route::resource('banks', BankController::class);
 
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
+
+Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
 
 require __DIR__.'/auth.php';
