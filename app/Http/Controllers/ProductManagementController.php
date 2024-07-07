@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Rules\CheckString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -37,29 +38,34 @@ class ProductManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //save image to disk
-        $imagePath = $request->file('image')->store('products', 'public');
         $request->validate([
             'p_id' => 'required|unique:products',
-            'name' => 'required',
+            'name' => ['required', new CheckString],
             'qty' => 'required',
             'price' => 'required',
             'category_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $product = new Product();
 
-        $product->p_id        = $request->p_id;
-        $product->name        = $request->name;
-        $product->qty         = $request->qty;
-        $product->price       = $request->price;
-        $product->status      = 1;
-        $product->category_id = $request->category_id;
-        $product->seller_id   = auth()->user()->id;
-        $product->image       = $imagePath;
-        $product->save();
+        if ($request->hasFile('image')) {
+            // Save image to disk
+            $imagePath = $request->file('image')->store('products', 'public');
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully');
+            $product = new Product();
+            $product->p_id = $request->p_id;
+            $product->name = $request->name;
+            $product->qty = $request->qty;
+            $product->price = $request->price;
+            $product->status = 1;
+            $product->category_id = $request->category_id;
+            $product->seller_id = auth()->user()->id;
+            $product->image = $imagePath;
+            $product->save();
+
+            return redirect()->route('products.index')->with('success', 'Product created successfully');
+        } else {
+            return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
+        }
     }
 
     /**

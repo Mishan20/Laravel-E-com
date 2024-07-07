@@ -15,25 +15,25 @@
 
                     <div class="mt-4">
                         <x-input-label for="p_id" :value="__('Product ID')" />
-                        <x-text-input id="p_id" class="block w-full mt-1" type="text" name="p_id" :value="old('id')" required autocomplete="" />
+                        <x-text-input id="p_id" class="block w-full mt-1" type="text" name="p_id" :value="old('id')"  autocomplete="" />
                         <x-input-error :messages="$errors->get('p_id')" class="mt-2" />
                     </div>
 
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-text-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')"  autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="number" :value="__('Quantity')" />
-                        <x-text-input id="qty" class="block w-full mt-1" type="number" name="qty" :value="old('qty')" required autocomplete="" />
+                        <x-text-input id="qty" class="block w-full mt-1" type="number" name="qty" :value="old('qty')"  autocomplete="" />
                         <x-input-error :messages="$errors->get('qty')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="number" :value="__('Price')" />
-                        <x-text-input id="price" class="block w-full mt-1" type="number" name="price" :value="old('price')" required autocomplete="new-price" />
+                        <x-text-input id="price" class="block w-full mt-1" type="number" name="price" :value="old('price')"  autocomplete="new-price" />
                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
 
@@ -50,7 +50,8 @@
 
                     <div class="mt-4">
                         <x-input-label for="image" :value="__('Image')" />
-                        <div class="dropzone" id="image-dropzone"></div>
+                        <input type="file" name="image" id="image" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"> 
+                        {{-- <x-text-input id="image" class="block w-full mt-1" type="file" name="image" :value="old('image')"  autocomplete="new-image" /> --}}
                         <x-input-error :messages="$errors->get('image')" class="mt-2" />
                     </div>
 
