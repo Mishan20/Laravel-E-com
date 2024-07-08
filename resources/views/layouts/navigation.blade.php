@@ -51,6 +51,16 @@
             </div>
             @endhasrole
 
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- Language Switcher -->
+                <a href="{{ route('lang.switch', 'en') }}" class="px-2 py-1 text-sm font-medium text-gray-700 hover:text-gray-900">
+                    English
+                </a>
+                <a href="{{ route('lang.switch', 'si') }}" class="px-2 py-1 text-sm font-medium text-gray-700 hover:text-gray-900">
+                    සිංහල
+                </a>
+            </div>
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

@@ -1,3 +1,16 @@
 {
-    
+    "Product List": "Product List",
+    "Add new Product": "Add new Product",
+    "ID": "ID",
+    "Category": "Category",
+    "Seller": "Seller",
+    "Name": "Name",
+    "Qty": "Qty",
+    "Price": "Price",
+    "Status": "Status",
+    "Action": "Action",
+    "View": "View",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "No products found.": "No products found."
 }

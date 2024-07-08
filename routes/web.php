@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\UserManagememntController;
 use App\Http\Controllers\ProductManagementController;
@@ -52,5 +53,6 @@ Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogl
 Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
+Route::get('lang/{lang}', [LocalizationController::class, 'switchLang'])->name('lang.switch');
 
 require __DIR__.'/auth.php';
