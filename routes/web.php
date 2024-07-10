@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('products/export/', [ProductManagementController::class, 'export']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isAdmin');
 
 Route::middleware('auth')->group(function () {
@@ -54,5 +55,6 @@ Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFaceboo
 Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
 Route::get('lang/{lang}', [LocalizationController::class, 'switchLang'])->name('lang.switch');
+
 
 require __DIR__.'/auth.php';

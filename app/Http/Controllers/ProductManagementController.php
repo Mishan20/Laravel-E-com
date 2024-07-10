@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductExport;
 use App\Models\Product;
 use App\Models\Category;
 use App\Rules\CheckString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class ProductManagementController extends Controller
@@ -146,5 +148,10 @@ class ProductManagementController extends Controller
         }
 
         return redirect()->route('products.edit', $product->id)->with('success', 'Product image deleted successfully');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ProductExport, 'products.xlsx');
     }
 }

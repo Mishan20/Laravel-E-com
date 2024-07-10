@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{'Product List' }}
-        </h2>
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                {{ __('Product List') }}
+            </h2>
+        </div>
+        <div>
+            <a type="button" href="{{ url('/products/export/') }}" class="block px-3 py-2 text-sm font-semibold text-white bg-green-500 rounded-md shadow-sm text-end hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('Export') }}</a> 
+        </div>
+    </div>
     </x-slot>
 
     <div class="py-12">
