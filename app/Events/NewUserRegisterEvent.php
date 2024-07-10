@@ -34,4 +34,8 @@ class NewUserRegisterEvent
             new Channel('new-user-register'),
         ];
     }
+    public function broadcastWith(): array
+    {
+        return ['message' => $this->msg];
+    }
 }

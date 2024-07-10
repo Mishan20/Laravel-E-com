@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
         // $user->assignRole($role);
 
         Auth::login($user);
-        NewUserRegisterEvent::dispatch();
+        event(new NewUserRegisterEvent());
 
         return redirect(route('dashboard', absolute: false));
     }

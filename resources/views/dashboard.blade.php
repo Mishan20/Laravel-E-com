@@ -107,19 +107,19 @@
     </div>
 
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js">
-        // Enable pusher logging - don't include this in production
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
         Pusher.logToConsole = true;
 
         var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
-            cluster: "{{ env('PUSHER_APP_CLUSTER') }}"
+            cluster: "{{ env('PUSHER_APP_CLUSTER') }}",
+            encrypted: true
         });
 
         var channel = pusher.subscribe('new-user-register');
         channel.bind('App\\Events\\NewUserRegisterEvent', function(data) {
             console.log(data);
-            // Do What You Want With Data
-            // I Will Be Enough With Print It On Console
+            // Handle the data as needed
         });
     </script>
 </x-app-layout>
