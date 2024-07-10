@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NewUserRegisterEvent;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class RegisteredUserController extends Controller
         // $user->assignRole($role);
 
         Auth::login($user);
+        NewUserRegisterEvent::dispatch();
 
         return redirect(route('dashboard', absolute: false));
     }
