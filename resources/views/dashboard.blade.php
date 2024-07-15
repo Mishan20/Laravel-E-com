@@ -106,7 +106,7 @@
         </div>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         Pusher.logToConsole = true;
@@ -118,8 +118,7 @@
 
         var channel = pusher.subscribe('new-user-register');
         channel.bind('App\\Events\\NewUserRegisterEvent', function(data) {
-            console.log(data);
-            // Handle the data as needed
+            alert('New user registered: ' + JSON.stringify(data));
         });
     </script>
 </x-app-layout>

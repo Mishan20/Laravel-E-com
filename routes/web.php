@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
@@ -55,6 +56,13 @@ Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFaceboo
 Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
 Route::get('lang/{lang}', [LocalizationController::class, 'switchLang'])->name('lang.switch');
+
+use App\Events\NewUserRegisterEvent;
+
+Route::get('/test-broadcast', function () {
+    event(new NewUserRegisterEvent());
+    return 'Event has been sent!';
+});
 
 
 require __DIR__.'/auth.php';
