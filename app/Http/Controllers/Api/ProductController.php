@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Rules\CheckString;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends BaseController
 {
@@ -17,7 +18,8 @@ class ProductController extends BaseController
     {
         try {
             $products = Product::all();
-            return $this->sendResponse($products, 'Products retrieved successfully');
+            return $this->sendResponse(ProductResource::collection($products), 'Products retrieved successfully');
+            // return multiple responses then return ProductResource::collection($products);
         } catch (\Exception $e) {
             return $this->sendError('An error occurred while retrieving products.', [$e->getMessage()]);
         }
@@ -72,8 +74,13 @@ class ProductController extends BaseController
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
-        return response()->json($product);
+        try {
+            $product = Product::find($id);
+            return $this->sendResponse(new ProductResource($product), 'Product retrieved successfully');
+            // return only one then return new ProductResource($product);
+        } catch (\Exception $e) {
+            return $this->sendError('An error occurred while retrieving product.', [$e->getMessage()]);
+        }
     }
 
     /**
@@ -116,6 +123,8 @@ class ProductController extends BaseController
         $product->category_id = $request->category_id;
         $product->seller_id = $request->seller_id;
         $product->save();
+
+        return $this->sendResponse(new ProductResource($product), 'Product updated successfully');
     }
 
     /**
@@ -125,5 +134,7 @@ class ProductController extends BaseController
     {
         $product = Product::find($id);
         $product->delete();
+
+        return $this->sendResponse([], 'Product deleted successfully');
     }
 }
