@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\TestFakeApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
@@ -16,6 +16,10 @@ use App\Http\Controllers\ProductManagementController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Test Fake API products
+Route::get('/fake-api-products', [TestFakeApiController::class, 'index']);
+
 
 Route::get('products/export/', [ProductManagementController::class, 'export']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isAdmin');
