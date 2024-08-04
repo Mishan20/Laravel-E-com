@@ -13,7 +13,6 @@ class TestFakeApiController extends Controller
     public function index(){
 
         Auth::user()->notify(new InvoicePaid());
-        dd("fsfsfs");
 
         $response = Http::get('https://fakestoreapi.com/products');
         $products = $response->json();

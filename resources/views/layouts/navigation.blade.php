@@ -40,7 +40,7 @@
                 @endhasrole
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="url('/fake-api-products')" :active="request()->routeIs('fake-product-list')">
+                    <x-nav-link :href="route('fake.products')" :active="request()->routeIs('fake.products')">
                         {{ __('Fake Products') }}
                     </x-nav-link>
                 </div>

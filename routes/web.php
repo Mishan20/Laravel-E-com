@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 //Test Fake API products
-Route::get('/fake-api-products', [TestFakeApiController::class, 'index']);
+Route::get('/fake-api-products', [TestFakeApiController::class, 'index'])->name('fake.products');
 
 
 Route::get('products/export/', [ProductManagementController::class, 'export']);
