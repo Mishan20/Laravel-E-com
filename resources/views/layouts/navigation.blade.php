@@ -50,9 +50,11 @@
             @hasrole(['admin', 'buyer'])
             <div class="flex items-center">
                 <a href="{{ route('cart') }}" class="relative text-gray-600 hover:text-gray-800">
+                    <!-- Cart icon -->
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13l-1.4 7h12.8l-1.4-7M7 13h10m-5 5h.01M5 21h14"></path>
                     </svg>
+                    <span class="absolute inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-white bg-green-500 rounded-full -top-1 -right-5">{{ count(session('cart', [])) }}</span>
                 </a>
             </div>
             @endhasrole
