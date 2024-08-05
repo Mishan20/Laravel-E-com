@@ -29,16 +29,28 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-            <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-            @endif
+        <!-- Google Recaptcha Widget-->
+        <div class="mt-4 g-recaptcha" data-sitekey={{config('services.recaptcha.key')}}></div>
+        <x-input-error :messages="$errors->get('g-recaptcha-response')" class="mt-2" />
 
+        <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-start">
+                <div>
+                    @if (Route::has('password.request'))
+                    <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                    @endif
+                </div>
+            </div>
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+        </div>
+        <div>
+            <a class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                {{ __('Dont have an account?') }}
+            </a>
         </div>
 
         <div class="block mt-4">
