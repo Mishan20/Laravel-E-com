@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -48,7 +49,7 @@ class CategoryController extends Controller
      */
     public function show($id): View
     {
-        $category = Category::find($id);
+        $category = Category::find(Crypt::decrypt($id)); 
 
         return view('category.show', compact('category'));
     }
@@ -58,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id): View
     {
-        $category = Category::find($id);
+        $category = Category::find(Crypt::decrypt($id));
 
         return view('category.edit', compact('category'));
     }
