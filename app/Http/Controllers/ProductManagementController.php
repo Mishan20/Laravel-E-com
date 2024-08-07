@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Rules\CheckString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
@@ -75,7 +76,7 @@ class ProductManagementController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::find(Crypt::decrypt($id));
         return view('products.show', compact('product'));
     }
 
@@ -85,7 +86,7 @@ class ProductManagementController extends Controller
     public function edit(string $id)
     {
         $categories = Category::all();
-        $product = Product::find($id);
+        $product = Product::find(Crypt::decrypt($id));
         return view('products.edit', compact('product', 'categories'));
     }
 

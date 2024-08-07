@@ -60,8 +60,8 @@
                                 <td class="px-4 py-2 text-center border">{{ number_format($product->price, 2) }}</td>
                                 <td class="px-4 py-2 text-center border">{{ $product->status() }}</td>
                                 <td class="px-4 py-2 text-center border">
-                                    <a href="{{ route('products.show', $product->id) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">{{ __('View') }}</a>
-                                    <a href="{{ route('products.edit', $product->id) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">{{ __('Edit') }}</a>
+                                    <a href="{{ route('products.show', Crypt::encrypt($product->id)) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">{{ __('View') }}</a>
+                                    <a href="{{ route('products.edit', Crypt::encrypt($product->id)) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">{{ __('Edit') }}</a>
                                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
