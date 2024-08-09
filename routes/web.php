@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\TestFakeApiController;
+use App\Events\NewUserRegisterEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
@@ -10,8 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\FacebookLoginController;
-use App\Http\Controllers\UserManagememntController;
-use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\Api\TestFakeApiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,11 +61,17 @@ Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFa
 
 Route::get('lang/{lang}', [LocalizationController::class, 'switchLang'])->name('lang.switch');
 
-use App\Events\NewUserRegisterEvent;
+use App\Http\Controllers\UserManagememntController;
+use App\Http\Controllers\ProductManagementController;
 
 Route::get('/test-broadcast', function () {
     event(new NewUserRegisterEvent());
     return 'Event has been sent!';
+});
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('/stripe', 'stripe');
+    Route::post('/stripe', 'stripePost')->name('stripe.post');
 });
 
 

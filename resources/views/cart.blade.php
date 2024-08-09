@@ -42,7 +42,8 @@
                                 <button type="submit" class="px-2 py-1 text-white bg-green-500 rounded hover:bg-green-700">+</button>
                             </form>
                             <p class="ml-4 text-sm text-gray-700">${{ $item['price'] }}</p>
-                            <p class="ml-4 text-sm font-medium text-gray-900">${{ $item['itemTotal'] }}</p> <!-- Display item total -->
+                            <p class="ml-4 text-sm font-medium text-gray-900">${{ $item['itemTotal'] }}</p>
+                            <!-- Display item total -->
                         </div>
                     </div>
                 </div>
@@ -52,6 +53,9 @@
                     <h2 class="text-xl font-semibold leading-tight text-gray-800">
                         Total: ${{ $total }}
                     </h2>
+                </div>
+                <div>
+                    <a href="{{ url('/stripe') }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Checkout</a>
                 </div>
                 @else
                 <div class="text-center">
