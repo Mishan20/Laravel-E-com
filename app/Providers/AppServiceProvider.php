@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Cart;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\view;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

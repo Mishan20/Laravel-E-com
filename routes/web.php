@@ -22,7 +22,7 @@ Route::get('/fake-api-products', [TestFakeApiController::class, 'index'])->name(
 
 
 Route::get('products/export/', [ProductManagementController::class, 'export']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isAdmin');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('isAdmin');// we can use verify middleware
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

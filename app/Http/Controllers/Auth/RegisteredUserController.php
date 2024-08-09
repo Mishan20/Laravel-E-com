@@ -31,18 +31,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // $recaptcha = $request->input('g-recaptcha-response');
+        $recaptcha = $request->input('g-recaptcha-response');
 
-        // if (is_null($recaptcha)) {
-        //     $request->session()->flash('message', "  Please complete the recaptcha again to proceed. ");
-        //     return redirect()->back();
-        // }
+        if (is_null($recaptcha)) {
+            $request->session()->flash('message', "  Please complete the recaptcha again to proceed. ");
+            return redirect()->back();
+        }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'g-recaptcha-response' => 'required|captcha',
+            //'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $user = User::create([
