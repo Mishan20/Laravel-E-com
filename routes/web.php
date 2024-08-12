@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TwilioSMSController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\FacebookLoginController;
@@ -75,5 +76,7 @@ Route::controller(StripePaymentController::class)->group(function(){
     Route::post('/stripe', 'stripePost')->name('stripe.post');
 });
 
+
+Route::get('sendSMS', [TwilioSMSController::class, 'index']);
 
 require __DIR__.'/auth.php';
