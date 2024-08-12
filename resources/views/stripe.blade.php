@@ -54,7 +54,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
   
-    var stripe = Stripe('{{ env("STRIPE_KEY") }}')
+    var stripe = Stripe('{{ config("services.stripe.pk") }}');
     var elements = stripe.elements();
     var cardElement = elements.create('card');
     cardElement.mount('#card-element');

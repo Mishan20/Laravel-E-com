@@ -26,13 +26,13 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request): RedirectResponse
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Stripe::setApiKey(config('services.stripe.sk'));
       
         Stripe\Charge::create ([
                 "amount" => 10 * 100,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
-                "description" => "Test payment from itsolutionstuff.com." 
+                "description" => "Test payment from Mishan-Ecom.live" 
         ]);
                 
         return back()
