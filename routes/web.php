@@ -12,6 +12,8 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\FacebookLoginController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\Api\TestFakeApiController;
+use App\Http\Controllers\UserManagememntController;
+use App\Http\Controllers\ProductManagementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,8 +63,7 @@ Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFa
 
 Route::get('lang/{lang}', [LocalizationController::class, 'switchLang'])->name('lang.switch');
 
-use App\Http\Controllers\UserManagememntController;
-use App\Http\Controllers\ProductManagementController;
+
 
 Route::get('/test-broadcast', function () {
     event(new NewUserRegisterEvent());

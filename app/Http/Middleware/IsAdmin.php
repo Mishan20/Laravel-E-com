@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->hasRole('seller')) {
+        if (Auth::user() && Auth::user()->hasRole('buyer')) {
             return redirect('products');
             
         }
