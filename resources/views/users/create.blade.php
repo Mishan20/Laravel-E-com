@@ -3,13 +3,18 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Add User') }}
         </h2>
-        <a href="{{url('/users')}}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Back to Users List</a>
     </x-slot>
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm overflow-hiden sm:rounded-lg">
-                <div class="p-6 text-gray-900"></div>
+                <div class="p-6 text-gray-900">
+                <div class="sm:flex sm:items-center">
+                        <div class="mt-4 mb-4 sm:ml-2 sm:mt-0 sm:flex-none">
+                            <a type="button" href="{{ url('/users') }}" class="block px-3 py-2 text-sm font-semibold text-white bg-blue-500 rounded-md shadow-sm text-end hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('Back to User List') }}</a>
+                        </div>
+                    </div>
+                </div>
                 <form action="{{ route('users.store')}}" method="POST">
                     @csrf
 

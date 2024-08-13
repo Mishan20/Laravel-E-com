@@ -3,13 +3,17 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('User List') }}
         </h2>
-        <a href="{{url('/users/create')}}" class="px-2 py-1 font-bold text-right text-white bg-blue-500 rounded hover:bg-blue-700">Add Users</a>
     </x-slot>
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                <div class="sm:flex sm:items-center">
+                        <div class="mt-4 mb-4 sm:ml-2 sm:mt-0 sm:flex-none">
+                            <a type="button" href="{{ url('/users/create') }}" class="block px-3 py-2 text-sm font-semibold text-white bg-blue-500 rounded-md shadow-sm text-end hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('Add new User') }}</a>
+                        </div>
+                    </div>
                     <!-- Session Messages -->
                     @if (session('success'))
                     <div class="mb-4 text-green-600">
@@ -52,4 +56,47 @@
             </div>
         </div>
     </div>
+
+    <!-- Pusher Notification Script -->
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        // Enable Pusher logging - disable in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('{{ config("services.pusher.key") }}', {
+            cluster: '{{ config("services.pusher.options.cluster") }}',
+        });
+
+        var channel = pusher.subscribe('mishan-ecom');
+        channel.bind('new-user-registered', function(data) {
+            showNotification('New user has registered.');
+        });
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification-popup';
+            notification.innerText = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 6000); // 1 minute
+        }
+    </script>
+    <style>
+        .notification-popup {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 16px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
 </x-app-layout>

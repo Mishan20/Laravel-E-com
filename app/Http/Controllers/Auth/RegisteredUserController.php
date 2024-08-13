@@ -50,14 +50,15 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        event(new Registered($user));
+        event(new NewUserRegisterEvent($user));
+        //event(new Registered($user));
 
         // $role = Role::create(['name' => 'buyer']);
         // $user->assignRole($role);
+        
 
         Auth::login($user);
-        event(new NewUserRegisterEvent());
+        
 
 
         return redirect(route('dashboard', absolute: false));
