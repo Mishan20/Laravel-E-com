@@ -13,271 +13,134 @@
 
     <!-- Styles -->
     <style>
-        /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
-        *,
-        ::after,
-        ::before {
-            box-sizing: border-box;
-            border-width: 0;
-            border-style: solid;
-            border-color: #e5e7eb
-        }
-
-        ::after,
-        ::before {
-            --tw-content: ''
-        }
-
-        :host,
-        html {
-            line-height: 1.5;
-            -webkit-text-size-adjust: 100%;
-            -moz-tab-size: 4;
-            tab-size: 4;
-            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-feature-settings: normal;
-            font-variation-settings: normal;
-            -webkit-tap-highlight-color: transparent
-        }
-
         body {
             margin: 0;
-            line-height: inherit
+            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
         }
 
-        a {
+        .navbar {
+            background-color: #2d3748;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
             color: inherit;
-            text-decoration: inherit
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.2s;
         }
 
-        button,
-        input,
-        optgroup,
-        select,
-        textarea {
-            font-family: inherit;
-            font-feature-settings: inherit;
-            font-variation-settings: inherit;
-            font-size: 100%;
-            font-weight: inherit;
-            line-height: inherit;
-            color: inherit;
-            margin: 0;
-            padding: 0
+        .navbar a:hover {
+            color: #cbd5e0;
         }
 
-        button,
-        select {
-            text-transform: none
+        .main-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
         }
 
-        button {
-            cursor: pointer
+        .main-section h1 {
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
         }
 
-        :disabled {
-            cursor: default
-        }
-
-        img,
-        video {
-            max-width: 100%;
-            height: auto
-        }
-
-        *,
-        ::before,
-        ::after {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
-        }
-
-        ::backdrop {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
-        }
-
-        .relative {
-            position: relative
-        }
-
-        .flex {
-            display: flex
-        }
-
-        .items-center {
-            align-items: center
-        }
-
-        .justify-between {
-            justify-content: space-between
-        }
-
-        .bg-gray-800 {
-            background-color: #2d3748
-        }
-
-        .text-white {
-            color: #fff
-        }
-
-        .text-xl {
+        .main-section p {
+            margin-bottom: 2rem;
             font-size: 1.25rem;
-            line-height: 1.75rem
         }
 
-        .text-sm {
-            font-size: 0.875rem;
-            line-height: 1.25rem
+        .main-section img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .hover\:text-gray-400:hover {
-            color: #cbd5e0
+        .footer {
+            background-color: #2d3748;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .py-4 {
-            padding-top: 1rem;
-            padding-bottom: 1rem
+        .footer .social-links a {
+            margin: 0 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: color 0.2s;
         }
 
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem
+        .footer .social-links a:hover {
+            color: #cbd5e0;
         }
 
-        .rounded-md {
-            border-radius: 0.375rem
-        }
+        @media (max-width: 768px) {
+            .main-section h1 {
+                font-size: 2rem;
+            }
 
-        .transition {
-            transition: all 0.2s
+            .main-section p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="text-white bg-gray-800">
-        <div class="relative flex items-center justify-between px-6 py-4">
-            <a href="#" class="text-xl font-semibold">E-commerce</a>
-            <nav class="flex items-center space-x-4">
+<body>
+    <div class="navbar">
+        <a href="#" class="text-xl font-semibold">E-commerce</a>
+        <nav class="flex items-center">
+            @if (Route::has('login'))
+            @auth
+            <a href="{{ url('/dashboard') }}" class="p-4">Dashboard</a>
+            @else
+            <a href="{{ route('login') }}" class="p-4">Log in</a>
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}" class="p-4 ml-4">Register</a>
+            @endif
+            @endauth
+            @endif
+        </nav>
+    </div>
 
-                @if (Route::has('login'))
-                @auth
-                <a href="{{ url('/dashboard') }}" class="p-4 text-sm transition hover:text-gray-400">Dashboard</a>
-                @else
-                <a href="{{ route('login') }}" class="p-4 text-sm transition hover:text-gray-400">Log in</a>
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="p-4 text-sm transition hover:text-gray-400">Register</a>
-                @endif
-                @endauth
-                @endif
-            </nav>
+    <div class="main-section">
+        <img src="https://aimeos.org/fileadmin/aimeos.org/images/aimeos-screen-laravel-ecommerce.png" alt="E-commerce Banner">
+        <div>
+            <h1>Welcome to Our E-commerce Site</h1>
+            <p>Your one-stop shop for all your needs.</p>
         </div>
     </div>
 
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-            <div class="relative w-full max-w-2xl px-6 text-center lg:max-w-7xl">
-                <h1 class="py-10 text-4xl font-bold">Welcome to Our E-commerce Site</h1>
-                <p class="py-4 text-lg">Your one-stop shop for all your needs.</p>
-
-                <img src="https://miro.medium.com/v2/resize:fit:890/1*Ux6Eq5pvjEnnFt1SR7aovw.png" alt="E-commerce Banner" class="w-full h-auto rounded-md shadow-lg">
-            </div>
+    <footer class="footer">
+        <div>
+            <p>Contact us at: "YURESHA", Ihala Boowalla , Rikillagaskada</p>
+            <p>Email: is.senanayaka.m@gmail.com | Phone: +94766277163</p>
         </div>
-    </div>
-    <footer class="py-4 text-white bg-gray-800">
-        <div class="text-center ">
-            <p> @Created by Ishan Senanayaka</p>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+        <div>
+            <p>©2024 @ Created by Ishan Senanayaka</p>
         </div>
     </footer>
 </body>

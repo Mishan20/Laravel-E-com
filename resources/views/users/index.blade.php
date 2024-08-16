@@ -9,19 +9,19 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                <div class="sm:flex sm:items-center">
+                    <div class="sm:flex sm:items-center">
                         <div class="mt-4 mb-4 sm:ml-2 sm:mt-0 sm:flex-none">
                             <a type="button" href="{{ url('/users/create') }}" class="block px-3 py-2 text-sm font-semibold text-white bg-blue-500 rounded-md shadow-sm text-end hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('Add new User') }}</a>
                         </div>
                     </div>
                     <!-- Session Messages -->
                     @if (session('success'))
-                    <div class="mb-4 text-green-600">
+                    <div class="mb-4 text-green-600 notification-popup">
                         {{ session('success') }}
                     </div>
                     @endif
                     @if (session('error'))
-                    <div class="mb-4 text-red-600">
+                    <div class="mb-4 text-red-600 notification-popup">
                         {{ session('error') }}
                     </div>
                     @endif
@@ -42,7 +42,7 @@
                                 <td class="px-4 py-2 text-center border">{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
                                 <td class="px-4 py-2 text-center border">
                                     <a href="{{ route('users.edit', $user->id) }}" class="px-2 py-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirmDelete()">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-2 py-1 font-bold text-white bg-red-500 rounded hover:bg-red-700">Delete</button>
@@ -84,7 +84,25 @@
             }, 6000); // 1 minute
         }
     </script>
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this user? This action cannot be undone.');
+        }
+    </script>
     <style>
+        .notification-popup {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 16px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         .notification-popup {
             position: fixed;
             top: 10px;
